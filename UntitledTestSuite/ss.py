@@ -16,22 +16,25 @@ class TestAddGroup(unittest.TestCase):
     def test_add_group(self):
         wd = self.wd
 
-        wd.get("https://broex.dev/")
+        wd.get("https://broex.xyz/")
         wd.find_element_by_link_text("Log in").click()
         wd.find_element_by_id("login-email").clear()
-        wd.find_element_by_id("login-email").send_keys("fedyano@gmail.com")
+        wd.find_element_by_id("login-email").send_keys("dev@broex.io")
         wd.find_element_by_id("login-password").clear()
-        wd.find_element_by_id("login-password").send_keys("Pn7ZrW244")
+        wd.find_element_by_id("login-password").send_keys("111")
         wd.find_element_by_id("login-email").click()
         wd.find_element_by_id("login-password").click()
         wd.find_element_by_xpath("//button[@type='submit']").click()
-        wd.find_element_by_xpath("//div[5]/div[2]").click()
-        wd.find_element_by_name("hideZeroBalances").click()
-        wd.find_element_by_name("hideZeroBalances").click()
         wd.find_element_by_link_text("Assets").click()
-        wd.find_element_by_xpath("//nav").click()
         wd.find_element_by_link_text("Promotions").click()
-
+        wd.find_element_by_link_text("Exchange").click()
+        wd.find_element_by_link_text("Transactions").click()
+        wd.find_element_by_link_text("Referral program").click()
+        wd.find_element_by_link_text("Notifications").click()
+        wd.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Notifications'])[1]/following::div[2]").click()
+        wd.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Always'])[3]/following::*[name()='svg'][3]").click()
 
     def is_element_present(self, how, what):
         try:
@@ -48,7 +51,8 @@ class TestAddGroup(unittest.TestCase):
         return True
 
     def tearDown(self):
-        self.wd.quit()
+        time.sleep(5)
+        self.wd.close()
 
 
 if __name__ == "__main__":
